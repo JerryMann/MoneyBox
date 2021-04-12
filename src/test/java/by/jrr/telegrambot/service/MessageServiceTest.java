@@ -53,6 +53,14 @@ class MessageServiceTest extends TelegrambotApplicationTests {
         assertEquals(expectedResult, actualResult);
     }
 
+    @Test
+    void onAmountReceived() throws IOException {
+        Update update = objectMapper.readValue(new File("src/test/resources/amount.json"), Update.class);
+        SendMessage actualResult = messageService.onUpdateReceived(update);
+        SendMessage expectedResult = makeMessage("Set amount, please!");
+        assertEquals(expectedResult, actualResult);
+    }
+
     private SendMessage makeMessage(String text){
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(185929241L);

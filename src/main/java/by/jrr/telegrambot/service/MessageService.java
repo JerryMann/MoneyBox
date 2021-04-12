@@ -1,5 +1,7 @@
 package by.jrr.telegrambot.service;
 
+import by.jrr.telegrambot.model.Pocket;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
@@ -7,6 +9,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 
 @Service
 public class MessageService {
+
     public SendMessage onUpdateReceived(Update update) {
         SendMessage sendMessage = new SendMessage();
         if(update != null) {
@@ -20,6 +23,8 @@ public class MessageService {
                     return sendMessage.setText("Settings!");
                 } else if (magText.equals("/help")) {
                     return sendMessage.setText("Help!");
+                }else if (magText.equals("/amount")) {
+                    return sendMessage.setText("Set amount, please");
                 }
             }
         }
