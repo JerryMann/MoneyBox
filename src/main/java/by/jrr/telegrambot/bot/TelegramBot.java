@@ -1,5 +1,7 @@
-package by.jrr.telegrambot.service;
+package by.jrr.telegrambot.bot;
 
+import by.jrr.telegrambot.service.MessageService;
+import by.jrr.telegrambot.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,6 +11,7 @@ import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiValidationException;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,13 +29,21 @@ public class TelegramBot extends TelegramLongPollingBot {
     @Autowired
     MessageService messageService;
 
+    @Autowired
+    UserService userService;
+
 
     @Override
     public void onUpdateReceived(Update update) {
         SendMessage sendMessage = messageService.onUpdateReceived(update);
         try {
-            execute(sendMessage);
-        } catch (TelegramApiException e) {
+            messageService.setButtons(sendMessage);
+            try{
+                execute(sendMessage);
+            }catch (TelegramApiValidationException e){
+                System.out.println("TelegramApiValidationException");
+            }
+        } catch (TelegramApiException e ) {
             e.printStackTrace();
         }
     }
@@ -54,4 +65,14 @@ public class TelegramBot extends TelegramLongPollingBot {
     public String getBotToken() {
         return botToken;
     }
+
+//    public SendMessage sendMsg(Message message, String text){
+//        SendMessage sendMessage = new SendMessage();
+//        sendMessage.enableMarkdown(true);
+//        sendMessage.setChatId(message.getChatId().toString());
+//        sendMessage.setReplyToMessageId(message.getMessageId());
+//        sendMessage.setText(text);
+//        return sendMessage;
+//    }
+
 }

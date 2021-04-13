@@ -1,6 +1,7 @@
 package by.jrr.telegrambot.service;
 
 import by.jrr.telegrambot.TelegrambotApplicationTests;
+import by.jrr.telegrambot.bot.TelegramBot;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -18,13 +19,13 @@ class TelegramBotTest extends TelegrambotApplicationTests {
     @Autowired
     ObjectMapper objectMapper;
 
-//    @Test
+    //    @Test
     void onUpdateReceived() throws IOException {
         Update update = objectMapper.readValue(new File("src/test/resources/update.json"), Update.class);
         telegramBot.onUpdateReceived(update);
     }
 
-//    @Test
+    //    @Test
     void sendMessage() throws TelegramApiException {
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(185929241L);

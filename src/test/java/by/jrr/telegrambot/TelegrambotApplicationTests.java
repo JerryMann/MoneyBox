@@ -2,7 +2,7 @@ package by.jrr.telegrambot;
 
 import by.jrr.telegrambot.config.Mapper;
 import by.jrr.telegrambot.service.MessageService;
-import by.jrr.telegrambot.service.TelegramBot;
+import by.jrr.telegrambot.bot.TelegramBot;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

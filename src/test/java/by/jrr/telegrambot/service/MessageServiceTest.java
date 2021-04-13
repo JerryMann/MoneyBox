@@ -1,6 +1,7 @@
 package by.jrr.telegrambot.service;
 
 import by.jrr.telegrambot.TelegrambotApplicationTests;
+import by.jrr.telegrambot.bot.TelegramBot;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
